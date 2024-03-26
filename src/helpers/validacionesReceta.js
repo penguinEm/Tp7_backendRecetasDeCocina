@@ -1,16 +1,16 @@
 import { check } from "express-validator";
 import { resultadosValidaciones } from "./resultadosValidaciones.js";
 
-export const validacionesProducto = [
-  check("nombreProducto")
+export const validacionesReceta = [
+  check("nombreReceta")
     .notEmpty()
-    .withMessage("El nombre del producto es obligatorio")
+    .withMessage("El nombre de la receta es obligatorio")
     .isLength({
-      min: 3,
-      max: 50,
+      min: 2,
+      max: 40,
     })
     .withMessage(
-      "El nombre del producto debe contener entre 3 y 50 caracteres"
+      "El nombre de la receta debe contener entre 2 y 40 caracteres"
     ),
 
   check("precio")
@@ -19,10 +19,10 @@ export const validacionesProducto = [
     .isNumeric()
     .withMessage("El precio debe ser un valor numerico")
     .custom((value) => {
-      if (value >= 10 && value <= 10000) {
+      if (value >= 50 && value <= 10000) {
         return true;
       } else {
-        throw new Error("El valor del precio debe estar entre $10 y $10.000");
+        throw new Error("El valor del precio debe estar entre $50 y $10.000");
       }
     }),
 
@@ -32,32 +32,36 @@ export const validacionesProducto = [
     .matches(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|jpeg)/)
     .withMessage("La imagen debe ser un archivo: jpg, gif, png, jpeg"),
 
-  check("categoria")
-    .notEmpty()
-    .withMessage("La categoria es un campo obligatorio")
-    .isIn(["Panaderia", "Cafeteria", "Reposteria"])
-    .withMessage(
-      "Debe seleccionar una categoria válida entre: Panaderia, Cafeteria, Reposteria"
-    ),
-
-  check("descripcionBreve")
+  check("descripcion")
     .notEmpty()
     .withMessage("La descripcion breve es un dato obligatorio")
     .isLength({
       min: 4,
       max: 250,
     })
-    .withMessage("la descripción breve debe contener entre 4 y 250 caracteres"),
+    .withMessage("la descripción breve debe contener entre 4 y 35 caracteres"),
 
-  check("descripcion")
+  check("ingredientes")
     .notEmpty()
-    .withMessage("La descripcion detallada es un dato obligatorio")
+    .withMessage("Detallar los ingredientes es un dato obligatorio")
     .isLength({
-      min: 30,
-      max: 1000,
+      min: 10,
+      max: 500,
     })
     .withMessage(
-      "La descripcion detallada debe contener entre 30 y 1.000 caracteres"
+      "El detalle de los ingredientes debe contener entre 10 y 500 caracteres"
     ),
+
+  check("preparacion")
+    .notEmpty()
+    .withMessage("Detallar la preparacion es un dato obligatorio")
+    .isLength({
+      min: 10,
+      max: 500,
+    })
+    .withMessage(
+      "Detallar la preparacion debe contener entre 10 y 500 caracteres"
+    ),
+
   (req, res, next) => resultadosValidaciones(req, res, next),
 ];

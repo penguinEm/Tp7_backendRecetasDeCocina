@@ -1,17 +1,17 @@
 import mongoose, { Schema } from "mongoose";
 
-const productoSchema = new Schema({
-  nombreProducto: {
+const recetaSchema = new Schema({
+  nombreReceta: {
     type: String,
     required: true,
-    minLength: 3,
-    maxLength: 50,
+    minLength: 2,
+    maxLength: 40,
     unique: true,
   },
   precio: {
     type: Number,
     required: true,
-    min: 10,
+    min: 50,
     max: 10000,
   },
   imagen: {
@@ -25,26 +25,26 @@ const productoSchema = new Schema({
       message: (dato) => `${dato.value} no es una URL de imagen válida`,
     },
   },
-  categoria: {
-    type: String,
-    required: true,
-    enum: ["Panaderia", "Cafeteria", "Reposteria"],
-  },
-  descripcionBreve: {
-    type: String,
-    required: true,
-    minLength: 4,
-    maxLength: 250,
-  },
   descripcion: {
     type: String,
     required: true,
-    minLength: 30,
-    maxLength: 1000,
+    minLength: 4,
+    maxLength: 35,
+  },
+  ingredientes: {
+    type: String,
+    required: true,
+    minLength: 10,
+    maxLength: 500,
+  },
+  preparacion: {
+    type: String,
+    required: true,
+    minLength: 10,
+    maxLength: 500,
   },
 });
 
-//! Crear el MODELO de producto (es la representacion de la coleccion de productos)
-const Producto = mongoose.model("producto", productoSchema);
 
-export default Producto;
+const Receta = mongoose.model("receta", recetaSchema);
+export default Receta;
