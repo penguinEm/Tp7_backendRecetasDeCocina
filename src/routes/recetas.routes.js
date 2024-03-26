@@ -9,6 +9,7 @@ import {
 } from "../controllers/recetas.controllers.js";
 import { validacionesReceta } from "../helpers/validacionesReceta.js";
 const router = Router();
+import { check } from "express-validator";
 
 //! Como crear rutas.
 router
