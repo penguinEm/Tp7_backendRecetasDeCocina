@@ -6,7 +6,6 @@ const recetaSchema = new Schema({
     required: true,
     minLength: 2,
     maxLength: 40,
-    unique: true,
   },
   precio: {
     type: Number,
@@ -41,7 +40,7 @@ const recetaSchema = new Schema({
     type: String,
     required: true,
     minLength: 10,
-    maxLength: 500,
+    maxLength: 1000,
   },
 });
 

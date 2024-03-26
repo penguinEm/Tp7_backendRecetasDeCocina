@@ -57,10 +57,10 @@ export const validacionesReceta = [
     .withMessage("Detallar la preparacion es un dato obligatorio")
     .isLength({
       min: 10,
-      max: 500,
+      max: 1000,
     })
     .withMessage(
-      "Detallar la preparacion debe contener entre 10 y 500 caracteres"
+      "Detallar la preparacion debe contener entre 10 y 1.000 caracteres"
     ),
 
   (req, res, next) => resultadosValidaciones(req, res, next),
